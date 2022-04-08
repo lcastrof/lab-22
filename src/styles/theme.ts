@@ -1,8 +1,10 @@
+// TODO -> add theme type and make dark mode
 export const theme = {
   border: {
     radius: {
       other: "0.8rem",
       default: "0.4rem",
+      round: "50%",
     },
   },
   font: {
@@ -16,6 +18,7 @@ export const theme = {
       bold: 700,
     },
     sizes: {
+      xxsmall: "1.2rem",
       xsmall: "1.4rem",
       small: "1.6rem",
       medium: "1.8rem",
