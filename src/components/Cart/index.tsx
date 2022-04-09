@@ -5,6 +5,8 @@ import Button from "../Button";
 import Typography from "../Typography";
 
 import { Wrapper, Subtotal, Header } from "./styles";
+import { useCart } from "../../states";
+import Product from "../Product";
 
 export type MenuPaymentProps = {
   isOpen: boolean;
@@ -19,24 +21,51 @@ export type MenuPaymentProps = {
  * - Incrementador
  */
 
-const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => (
-  <Wrapper isOpen={isOpen}>
-    <Header>
-      <Typography level={5} size="large" fontWeight={600}>
-        Produtos no carrinho
-      </Typography>
-      <CloseOutline onClick={() => setIsOpen(false)} />
-    </Header>
+const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
+  //TODO -> Clean cart button
+  //TODO -> List products
+  //TODO -> Deal different with incrementor? Only passing id?
+  const { products, productsCount, formattedTotal } = useCart();
 
-    <Subtotal>
-      <Typography level={5} size="large" fontWeight={600}>
-        Total
-      </Typography>
-      <Typography>1,600.50</Typography>
-    </Subtotal>
+  if (productsCount === 0) {
+    return (
+      <Wrapper isOpen={isOpen}>
+        <Header>
+          {/* TODO -> refactor this style and improve empty message style */}
+          <CloseOutline style={{ marginLeft: 'auto' }} onClick={() => setIsOpen(false)} />
+        </Header>
+        <div style={{ textAlign: 'center' }}>
+          <Typography level={5} size="large" fontWeight={600}>
+            Nenhum produto no carrinho :(
+          </Typography>
+        </div>
+      </Wrapper>
+    );
+  }
 
-    <Button fullWidth>Finalizar compra</Button>
-  </Wrapper>
-);
+  return (
+    <Wrapper isOpen={isOpen}>
+      <Header>
+        <Typography level={5} size="large" fontWeight={600}>
+          Produtos no carrinho
+        </Typography>
+        <CloseOutline onClick={() => setIsOpen(false)} />
+      </Header>
+      <>
+        {products.map((product) => (
+          <Product key={product.id} {...product} />
+        ))}
+      </>
+      <Subtotal>
+        <Typography level={5} size="large" fontWeight={600}>
+          Total
+        </Typography>
+        <Typography>{formattedTotal}</Typography>
+      </Subtotal>
+
+      <Button fullWidth>Finalizar compra</Button>
+    </Wrapper>
+  )
+};
 
 export default MenuPayment;
