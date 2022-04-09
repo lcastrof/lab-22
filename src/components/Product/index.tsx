@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useCart from "../../states";
+import { useCart } from "../../states";
 import { ProductProps } from "../../types";
 import Incrementor from "../Incrementor";
 import { Wrapper, Info, Column, Text, WrapperIncrementor } from "./styles";

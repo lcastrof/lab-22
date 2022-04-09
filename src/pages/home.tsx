@@ -3,38 +3,20 @@ import Cart from "../components/Cart";
 import { Container } from "../components/Container";
 import Header from "../components/Header";
 import Product from "../components/Product";
-import api from "../services/api";
-import { ProductProps } from "../types";
-import { formatCurrency } from "../utils/format";
+import { useProducts } from "../states";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [productsList, setProductsList] = useState<ProductProps[]>([]);
-
+  const { fetchProducts, products } = useProducts();
   useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const response = await api.get("/products");
-        const formattedProducts = response.data.map((product: ProductProps) => {
-          return {
-            ...product,
-            formattedPrice: formatCurrency(product.price),
-          }
-        });
-        setProductsList(formattedProducts);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    loadProducts();
-  }, []);
+    fetchProducts();
+  }, [fetchProducts]);
 
   return (
     <>
       <Header setIsOpen={setIsOpen} />
       <Container>
-        {productsList.map((product) => (
+        {products.map((product) => (
           <Product key={product.id} {...product} />
         ))}
         <Cart isOpen={isOpen} setIsOpen={setIsOpen} />
