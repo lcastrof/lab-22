@@ -5,7 +5,7 @@ import Button from "../Button";
 import Typography from "../Typography";
 
 import { Wrapper, Subtotal, Header, ProductsList, ClearCartButton } from "./styles";
-import { useCart } from "../../states";
+import { useCart } from "../../store";
 import Product from "../Product";
 
 export type MenuPaymentProps = {

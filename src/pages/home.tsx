@@ -3,12 +3,12 @@ import Cart from "../components/Cart";
 import { Container } from "../components/Container";
 import Header from "../components/Header";
 import Product from "../components/Product";
-import { useProducts } from "../states";
+import { useProducts } from "../store";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { fetchProducts, products } = useProducts();
-  
+
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);

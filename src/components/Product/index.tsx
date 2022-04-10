@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useCart } from "../../states";
+import { useCart } from "../../store";
 import Incrementor from "../Incrementor";
 import { Wrapper, Info, Column, Text, WrapperIncrementor, SecondaryInfo, SubtotalWrapper } from "./styles";
 

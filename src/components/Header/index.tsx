@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { ShoppingBagOutline as ShoppingIcon } from "styled-icons/evaicons-outline";
-import { useCart } from "../../states";
+import { useCart } from "../../store";
 
 import { Badge, Container, SvgWrapper } from "./styles";
 
