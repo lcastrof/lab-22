@@ -2,24 +2,45 @@
   "products": [
     {
       "id": 1,
-      "name": "Product 1",
+      "name": "Iphone",
       "picture": "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
       "stock": 2,
       "price": 299.50
     },
     {
       "id": 2,
-      "name": "Product 2",
-      "picture": "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
+      "name": "Geladeira",
+      "picture": "https://imgs.casasbahia.com.br/50004596/1xg.jpg",
       "stock": 3,
-      "price": 300.50
+      "price": 492.99
     },
     {
       "id": 3,
-      "name": "Product 3",
-      "picture": "https://somos.lojaiplace.com.br/wp-content/uploads/2021/04/apple_iphone-12-spring21_purple_04202021.jpg",
-      "stock": 5,
-      "price": 23123.50
+      "name": "Notebook",
+      "picture": "https://imgs.casasbahia.com.br/55014086/1xg.jpg",
+      "stock": 1,
+      "price": 999.99
+    },
+    {
+      "id": 4,
+      "name": "Impressora",
+      "picture": "https://imgs.casasbahia.com.br/55029387/1xg.jpg",
+      "stock": 3,
+      "price": 240.00
+    },
+    {
+      "id": 5,
+      "name": "Secador",
+      "picture": "https://imgs.casasbahia.com.br/55002716/1xg.jpg",
+      "stock": 10,
+      "price": 72.50
+    },
+    {
+      "id": 6,
+      "name": "Liquidificador",
+      "picture": "https://imgs.casasbahia.com.br/5082530/1xg.jpg",
+      "stock": 7,
+      "price": 125.20
     }
   ]
 }

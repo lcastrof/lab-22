@@ -1,4 +1,3 @@
-// TODO -> add theme type and make dark mode
 export const theme = {
   border: {
     radius: {

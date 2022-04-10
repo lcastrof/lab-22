@@ -1,7 +1,19 @@
 import create from "zustand";
+import { ProductProps } from "../components/Product";
 import api from "../services/api";
-import { CartProduct, ProductProps } from "../types";
 import { formatCurrency } from "../utils/format";
+
+type CartProduct = {
+  id: number;
+  name: string;
+  price: number;
+  total: number;
+  formattedPrice?: string;
+  formattedTotal?: string;
+  picture: string;
+  quantity: number;
+  stock: number;
+};
 
 type CartHookProps = {
   products: CartProduct[];
@@ -10,7 +22,7 @@ type CartHookProps = {
   formattedTotal: string;
   addProduct: (product: ProductProps) => void;
   removeProduct: (id: number) => void;
-  cleanCart: () => void;
+  clearCart: () => void;
 };
 
 type ProductsHookProps = {
@@ -18,32 +30,34 @@ type ProductsHookProps = {
   fetchProducts: () => void;
 };
 
-// TODO -> Refactor code
 export const useCart = create<CartHookProps>((set, get) => ({
   products: [],
   productsCount: 0,
   total: 0,
   formattedTotal: '',
 
-  // TODO -> Validate if quantity surpasses stock and throw error if so
   addProduct: (product) => {
     set(({ products }) => {
       const productAlreadyAdded = products.find(
-        (p) => p.id === product.id
+        (productInCart) => productInCart.id === product.id
       );
 
       if (productAlreadyAdded) {
         return {
-          products: products.map((p) =>
-            p.id === product.id
-              ? {
-                ...p,
-                quantity: p.quantity + 1,
-                total: p.price * (p.quantity + 1),
-                formattedTotal: formatCurrency(p.price * (p.quantity + 1))
-              }
-              : p
-          ),
+          products: products.map((productInCart) => {
+            if (productInCart.id === product.id) {
+              const newQuantity = productInCart.quantity + 1;
+              const newTotal = productInCart.price * newQuantity;
+              return {
+                ...productInCart,
+                quantity: newQuantity,
+                total: newTotal,
+                formattedTotal: formatCurrency(newTotal),
+              };
+            }
+
+            return productInCart;
+          }),
         };
       }
 
@@ -78,27 +92,30 @@ export const useCart = create<CartHookProps>((set, get) => ({
     });
   },
   removeProduct: (id: number) => {
-    const product = get().products.find((p) => p.id === id);
-    // TODO -> Throw error?
+    const product = get().products.find((productInCart) => productInCart.id === id);
     if (!product) return;
 
     set(({ products }) => {
       if (product?.quantity === 1) {
         return {
-          products: products.filter((p) => p.id !== id),
+          products: products.filter((productInCart) => productInCart.id !== id),
         };
       }
       return {
-        products: products.map((p) =>
-          p.id === id
-            ? {
-              ...p,
-              quantity: p.quantity - 1,
-              total: p.price * (p.quantity - 1),
-              formattedTotal: formatCurrency(p.price * (p.quantity - 1))
-            }
-            : p
-        ),
+        products: products.map((product) => {
+          if (product.id === id) {
+            const newQuantity = product.quantity - 1;
+            const newTotal = product.price * newQuantity;
+            return {
+              ...product,
+              quantity: newQuantity,
+              total: newTotal,
+              formattedTotal: formatCurrency(newTotal),
+            };
+          }
+
+          return product;
+        }),
       };
     });
 
@@ -115,9 +132,12 @@ export const useCart = create<CartHookProps>((set, get) => ({
       });
     });
   },
-  cleanCart: () => {
+  clearCart: () => {
     set(() => ({
       products: [],
+      productsCount: 0,
+      total: 0,
+      formattedTotal: '',
     }));
   }
 }));

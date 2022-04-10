@@ -4,7 +4,7 @@ import { CloseOutline } from "@styled-icons/evaicons-outline";
 import Button from "../Button";
 import Typography from "../Typography";
 
-import { Wrapper, Subtotal, Header } from "./styles";
+import { Wrapper, Subtotal, Header, ProductsList, ClearCartButton } from "./styles";
 import { useCart } from "../../states";
 import Product from "../Product";
 
@@ -13,25 +13,13 @@ export type MenuPaymentProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-/**
- * Adicionar itens ao carrinho, design ao seu critério mas deve conter:
- * - Nome do produto
- * - Imagem
- * - Preço
- * - Incrementador
- */
-
 const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
-  //TODO -> Clean cart button
-  //TODO -> List products
-  //TODO -> Deal different with incrementor? Only passing id?
-  const { products, productsCount, formattedTotal } = useCart();
+  const { products, productsCount, formattedTotal, clearCart } = useCart();
 
   if (productsCount === 0) {
     return (
       <Wrapper isOpen={isOpen}>
         <Header>
-          {/* TODO -> refactor this style and improve empty message style */}
           <CloseOutline style={{ marginLeft: 'auto' }} onClick={() => setIsOpen(false)} />
         </Header>
         <div style={{ textAlign: 'center' }}>
@@ -51,11 +39,12 @@ const MenuPayment = ({ isOpen, setIsOpen }: MenuPaymentProps) => {
         </Typography>
         <CloseOutline onClick={() => setIsOpen(false)} />
       </Header>
-      <>
+      <ProductsList>
+        <ClearCartButton type="button" onClick={clearCart}>Limpar carrinho</ClearCartButton>
         {products.map((product) => (
           <Product key={product.id} {...product} />
         ))}
-      </>
+      </ProductsList>
       <Subtotal>
         <Typography level={5} size="large" fontWeight={600}>
           Total

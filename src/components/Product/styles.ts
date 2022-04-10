@@ -79,3 +79,15 @@ export const WrapperIncrementor = styled.div`
     margin-top: 1.4rem;
   `}
 `;
+
+export const SecondaryInfo = styled.div`
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+`;
+
+export const SubtotalWrapper = styled.div`
+  .subtotal {
+    font-weight: bold;
+  }
+`;

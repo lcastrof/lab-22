@@ -15,6 +15,7 @@ export const Wrapper = styled.nav<Pick<MenuPaymentProps, "isOpen">>`
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.25);
   z-index: 1;
+  overflow: auto;
 
   h4 {
     margin-bottom: 3.2rem;
@@ -43,4 +44,19 @@ export const Header = styled.div`
     color: ${({ theme }) => theme.colors.primary};
     width: 3rem;
   }
+`;
+
+export const ProductsList = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ClearCartButton = styled.button`
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  color: ${({ theme }) => theme.colors.secondary};
+  margin-left: auto;
+  margin-bottom: 2.6rem;
+  font-size: ${({ theme }) => theme.font.sizes.small};
 `;
