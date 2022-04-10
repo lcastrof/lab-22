@@ -87,6 +87,9 @@ export const SecondaryInfo = styled.div`
 `;
 
 export const SubtotalWrapper = styled.div`
+  ${media.lessThan("medium")`
+      margin-top: 1.4rem;
+  `}
   .subtotal {
     font-weight: bold;
   }
