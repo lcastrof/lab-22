@@ -25,12 +25,10 @@ const Product = (product: ProductProps & { formattedTotal?: string }) => {
 
   const handleAddProduct = () => {
     addProduct(product);
-    setSelectedQuantity((prevQuantity) => prevQuantity + 1);
   }
 
   const handleRemoveProduct = () => {
     removeProduct(id);
-    setSelectedQuantity((prevQuantity) => prevQuantity - 1);
   }
 
   return (
